@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tahmin Oyunu</title>
+</head>
+<body>
+  <h1>Tahmin Oyunu</h1>
+  <p id="guessesLabel">1. Tahmini Girin: </p>
+  <input type="number" id="guessInput">
+  <button onclick="makePrediction()">Tahmin Yap</button>
+  <hr>
+  <p id="resultLabel"></p>
+
+  <script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1; 
+    let attempts = 1;
+
+    function makePrediction() {
+      let guess = parseInt(document.getElementById('guessInput').value);
+      let resultLabel = document.getElementById('resultLabel');
+      
+      if (guess === randomNumber) {
+        resultLabel.textContent = `Sayı ${attempts}. denemede bulundu${attempts === 1 ? '' : ''}.`;
+      } else if (attempts === 7) {
+        resultLabel.textContent = "Deneme hakkınız kalmadı. Kaybettiniz..";
+      } else {
+        let message = guess < randomNumber ? "Daha büyük bir sayı girin." : "Daha küçük bir sayı girin.";
+        resultLabel.textContent = message;
+        document.getElementById('guessesLabel').textContent = ` ${attempts + 1}${attempts === 6 ? '.' : attempts === 5 ? '.' : attempts === 4 ? '.' : attempts === 3 ? '.' : attempts === 2 ? '.' : '.'} tahmini girin: `;
+        attempts++;
+      }
+    }
+  </script>
+</body>
+</html>
